@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>tempsms</title>
+<style>
+.iframe-portrait {
+	margin: 20px 10px 20px 10px;
+	max-width: 600px;
+	width: 100%;
+	height: 600px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="ps-3 row card bg-dark text-white text-no-wrap" th:if="${user != null}">
+		<div class="card-body pb-2 pt-2">Balance : <span class="balance" th:text="${user.balance}"></span></div>
+	</div>
+	<hr>
+	<div class="alert btn-warning btn-sm">Dont Send any Fraud Money the QR Code. If we find out any fraud transaction, your id will be blocked permanently.</div>
+	<div class="message alert hidden"></div>
+	<form class="d-grid recharge-amount-bharatpe">
+		<input class="form-control" type="number" min="10" max="9999" autofocus id="amount" placeholder="Enter Amount in Rs" autocomplete="off" />
+		<button type="submit" class="submit btn btn-primary btn-sm mt-2 btn-block">Proceed</button>
+		<div><a href="/recharge/rechargeHistory" class="d-grid gap-2 pt-2"><button class="btn btn-secondary btn-sm btn-block">Recharge History</button></a></div>
+	</form>
+</div>
+
+
+<div id="payment-modal" class="rk-modal">
+  <div class="rk-modal-content">
+	<span class="rk-modal-close">&times;</span>
+    <div class="rk-modal-header">
+      <p id="payment-amount-header">Scan to pay: <span id="payment-amount" class="amount"></span></p>
+	  <p id="payment-completed-header">Recharge amount added</p>
+    </div>
+    <div class="rk-modal-body">
+      <img id="qr-code-img" alt="QR Code" />
+	  <button id="payment-upi-link" class="btn btn-sm btn-primary rk-modal-body-button link-window-open">Pay Using any UPI app</button>
+	  <div id="payment-status-body" class="rk-modal-body-content hidden"></div>
+    </div>
+    <div class="rk-modal-footer">
+		<p>Time Left: <span id="timer"></span></p>
+		<p>Status: <span id="status" class="status-pending">PENDING</span></p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
