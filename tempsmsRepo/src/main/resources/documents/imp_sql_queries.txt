@@ -1,0 +1,37 @@
+---------------------------------------
+1. Remove Duplicate Otp_History
+---------------------------------------
+
+	DELETE FROM otpwala.users_otp_history 
+		WHERE id IN (SELECT id FROM ( SELECT id, ROW_NUMBER() OVER (PARTITION BY received_otp ORDER BY received_otp) AS row_num FROM otpwala.users_otp_history) t WHERE  row_num > 1 );
+		
+
+---------------------------------------
+2. Clear User_Balance_Audit
+---------------------------------------
+	
+
+	DELETE FROM otpwala.user_balance_audit WHERE message <> 'ADDED' AND date(archive_time) < date(sysdate());
+	
+---------------------------------------
+3. Clear users_otp_history
+---------------------------------------
+	
+
+	DELETE FROM otpwala.users_otp_history WHERE insert_time > (NOW() - INTERVAL 4 HOUR);
+	
+
+---------------------------------------
+4. DISABLE INACTIVE USERS
+---------------------------------------
+
+SELECT * from users where otp_count = 0 and insert_timestamp < (now() - INTERVAL '30 DAY') and email is null and enabled = true;
+
+SELECT * from users where insert_timestamp < (now() - INTERVAL '30 DAY') and email is null and enabled = true and update_timestamp is null;
+
+
+UPDATE users SET enabled = false WHERE otp_count = 0 and insert_timestamp < (now() - INTERVAL '30 DAY') and email is null and enabled = true;
+
+UPDATE users SET enabled = false WHERE insert_timestamp < (now() - INTERVAL '30 DAY') and email is null and enabled = true 
+and update_timestamp is null;
+
