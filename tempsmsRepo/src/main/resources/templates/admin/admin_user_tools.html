@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ADMIN | OtpWala Website</title>
+</head>
+<body>
+<div class="container">
+	<h1>User Tools</h1>
+ 	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<hr>
+	<div class="list-group">
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/checkBalanceUser" class="list-group-item list-group-item-action list-group-item-light">Check Balance of Any User</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/changePassword" class="list-group-item list-group-item-action list-group-item-light">Change User's password</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/updateUser" class="list-group-item list-group-item-action list-group-item-light">Add Balance to User</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/deductUserBalance" class="list-group-item list-group-item-action list-group-item-light">Deduct balance from User</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/manualRecharge" class="list-group-item list-group-item-action list-group-item-light">Manual Recharge</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/getUsernameByUtr" class="list-group-item list-group-item-action list-group-item-light">Get Order Details By UTR</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/getAllOrders" class="list-group-item list-group-item-action list-group-item-light">Get All Orders</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/listUsers" class="list-group-item list-group-item-action list-group-item-light">List All Users</a>
+	</div>
+</div>
+
+</body>
+</html>
