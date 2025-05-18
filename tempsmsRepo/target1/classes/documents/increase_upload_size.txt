@@ -1,0 +1,26 @@
+---------------------------------------
+Increase the upload file size to AWS EC2
+---------------------------------------
+
+Increasing client_max_body_size in Nginx conf on AWS EC2/Elastic Beanstalk
+
+1. Open the nginx.conf file with an editor in the terminal:
+
+	sudo nano /etc/nginx/nginx.conf
+
+2. Add the client_max_body_size 50M inside the http block {}
+
+	http {
+	    server {
+	         .....
+	    }
+	
+	    client_max_body_size 50M;
+	}
+
+3. Save the configuration and restart the server with the following command:
+
+	sudo service nginx restart
+
+
+Then it should allow you to upload file size up to 50M to AWS EC2

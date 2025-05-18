@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Otp History | tempsms</title>
+</head>
+<body>
+<div class="container">
+	<h1>Today's Otp History | <span th:text="${username}"></span></h1>
+	<div><a href="/user/dashboard" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Dashboard</button></a></div>
+	<hr>
+	
+	<div class="table-responsive table-condensed">
+		<table class="table table-bordered">
+		    <thead>
+		        <tr>
+		            <th> Number </th>
+		            <th> Otp </th>
+		            <th> Received_Time </th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="otpHistory : ${otpHistoryPage.content}">
+		            <td><span th:text="${otpHistory.number}"></span></td>
+		            <td><span th:text="${otpHistory.receivedOtp}"></span></td>
+		            <td><span th:text="${otpHistory.insertTime}"></span></td>
+		             
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+	
+	<nav aria-label="Page navigation">
+		<ul th:if="${otpHistoryPage.totalPages > 1}" class="pagination">
+		    <th:block th:if="${otpHistoryPage.totalPages <= 6}">
+			    <li class="page-item" th:each="pageNumber : ${pageNumbers}" th:classappend="${pageNumber==otpHistoryPage.number + 1} ? active">
+				    <a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${pageNumber})}" th:text=${pageNumber} class="page-link"></a>
+				</li>
+			</th:block>
+			
+			<th:block th:if="${otpHistoryPage.totalPages > 6}">
+				<th:block th:if="${currentPage <= 2 || currentPage > otpHistoryPage.totalPages - 2}">
+					<li class="page-item" th:each="i : ${#numbers.sequence(1, 2)}" th:classappend="${currentPage == i} ? active">
+					    <a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${i})}" th:text="${i}" class="page-link"></a>
+					</li>
+					<li class="page-item">
+						<th:block th:if="${currentPage <= 2}">
+							<a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=3)}" th:text="..." class="page-link"></a>
+						</th:block>
+						
+						<th:block th:if="${currentPage > otpHistoryPage.totalPages - 2}">
+							<a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${otpHistoryPage.totalPages - 2})}" th:text="..." class="page-link"></a>
+						</th:block>
+					</li>
+					
+					<li class="page-item" th:each="i : ${#numbers.sequence(otpHistoryPage.totalPages - 1, otpHistoryPage.totalPages)}" th:classappend="${currentPage == i} ? active">
+					    <a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${i})}" th:text="${i}" class="page-link"></a>
+					</li>
+				</th:block>
+				
+				<th:block th:if="${currentPage > 2 && currentPage <= otpHistoryPage.totalPages - 2}">
+					 <li class="page-item first" th:classappend="${currentPage > 1 ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=1)}" tabindex="-1"  th:text="'&laquo;'"></a>
+		            </li>
+				    
+				    <li class="page-item prev" th:classappend="${currentPage > 1 ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${currentPage - 1})}" tabindex="-1"  th:text="'<'"></a>
+		            </li>
+					
+					<li class="page-item">
+						<a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${currentPage - 2})}" th:text="..." class="page-link"></a>
+					</li>
+					
+					<li class="page-item" th:each="i : ${#numbers.sequence(currentPage - 1, currentPage + 1)}" th:classappend="${currentPage == i} ? active">
+					    <a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${i})}" th:text="${i}" class="page-link"></a>
+					</li>
+					
+					<li class="page-item">
+						<a th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${currentPage + 2})}" th:text="..." class="page-link"></a>
+					</li>
+					
+					<li class="page-item next" th:classappend="${currentPage < otpHistoryPage.totalPages ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${currentPage + 1})}" tabindex="-1" th:text="'>'"></a>
+		            </li>
+		            <li class="page-item last" th:classappend="${currentPage < otpHistoryPage.totalPages ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{/user/otpHistory(size=${otpHistoryPage.size}, page=${otpHistoryPage.totalPages})}" tabindex="-1" th:text="'&raquo;'"></a>
+		            </li>
+				</th:block>
+				
+			</th:block>
+			
+		</ul>
+	</nav>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ADMIN | OtpWala Website</title>
+<style>
+#progress-wrp {
+  border: 1px solid #0099CC;
+  padding: 1px;
+  position: relative;
+  height: 30px;
+  border-radius: 3px;
+  margin: 10px;
+  text-align: left;
+  background: #fff;
+  box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+#progress-wrp .progress-bar {
+  height: 100%;
+  border-radius: 3px;
+  background-color: #f39ac7;
+  width: 0;
+  box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.11);
+}
+
+#progress-wrp .status {
+  top: 3px;
+  left: 50%;
+  position: absolute;
+  display: inline-block;
+  color: #000000;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<h2>Restore Data from Backup</h2>
+	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<hr>
+	<div class="mb-3 upload-backup-container">
+		<label for="backup-file" class="form-label">Upload File</label>
+		<input class="form-control" type="file" id="backup-file" th:attrappend="disabled = ${isEnabled == null || isEnabled == 'false'} ? @{disabled}">
+	</div>
+	<button type="submit" class="btn btn-sm btn-primary restore-backup-file" th:attrappend="disabled = ${isEnabled == null || isEnabled == 'false'} ? @{disabled}">Restore Backup</button>
+	<div id="progress-wrp" class="hidden">
+	    <div class="progress-bar"></div>
+	    <div class="status">0%</div>
+	</div>
+</div>
+
+</body>
+</html>

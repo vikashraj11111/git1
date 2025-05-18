@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ADMIN | OtpWala Website</title>
+</head>
+<body>
+<div class="container">
+	<h1>Server Tools Section</h1>
+	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<hr>
+	<div class="list-group">
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/listServices" class="list-group-item list-group-item-action list-group-item-light">List All Services</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/addService" class="list-group-item list-group-item-action list-group-item-light">Add a new Service</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/priceList" class="list-group-item list-group-item-action list-group-item-light">Service Pricing & Count</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/setServerPercentage" class="list-group-item list-group-item-action list-group-item-light">Set Server Percentage</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/comparePrice" class="list-group-item list-group-item-action list-group-item-light">Compare Prices</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/comparePriceAllServers" class="list-group-item list-group-item-action list-group-item-light">Compare Prices All Servers</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/updateKey" class="list-group-item list-group-item-action list-group-item-light">Update Server Key</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/serverList" class="list-group-item list-group-item-action list-group-item-light">Server List</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/updateMetadata" class="list-group-item list-group-item-action list-group-item-light">Update MetaData</a>
+	    <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" href="/admin/getServiceListPage" class="list-group-item list-group-item-action list-group-item-light">Service List</a>
+	</div>
+</div>
+
+</body>
+</html>

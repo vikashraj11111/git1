@@ -1,0 +1,84 @@
+<div th:if="${error != null}">
+	<span th:text="${error}"></span>
+	<button class="btn btn-outline-primary btn-sm font-monospace go-back">Go Back</button>
+</div>
+
+<div th:if="${error == null}">
+	<div class="otp-div font-monospace">
+		<h2 class="app-name-header pb-2" th:if="${appName != null}"><span th:text="${appName}"></span></h2>
+		<input type="hidden" th:if="${app != null}" id="app" th:value="${app}" />
+		<input type="hidden" th:id="checkRegistration" th:value="${registrationCheck}" />
+		<input type="hidden" th:id="appName" th:value="${appName}" />
+		<div th:if="${appName != null}">
+			<div class="row">
+				<div class="row otpDiv box-shadow-1">
+					<div class="col-sm-5">
+						<div class="number-container">
+							<span class="text">Number</span>
+							<div class="number">
+								<span th:if="${number != null}" th:text="${number}" th:remove="tag"></span>
+							</div>
+							<span id="copied-success" class="copied">
+		                		Copied!
+		               		</span>
+	               		</div>
+		               	<div><small class="text-muted click-to-copy"></small></div>
+					</div>
+					<div class="col-sm-1">
+						<span class="code"><span th:if="${code != null}" th:text="${code}" th:remove="tag"></span></span>
+					</div>
+					<div class="col-sm-3">
+						<span class="text">OTP</span>
+						<span class="otp"></span>
+					</div>
+				</div>
+				
+				<div class="messageDiv font-monospace box-shadow-1">
+					<span class="message pe-2"></span>
+					<a class="btn btn-outline-danger btn-sm" href="/user/dashboard">Go to Dashboard</a>
+				</div>
+			</div>
+			
+			<div th:if="${registrationCheck != null}" class="validate-registration">
+				<div class="registration-status pb-2"></div>
+			</div>
+			
+			<div id="retry-div">
+				<div class="retry-container">
+					<button class="btn btn-outline-secondary btn-sm" id="retry-get-number">Retry</button>
+				</div>
+			</div>
+			
+			<div id="resend-cancel-div">
+				<div class="cancel-resend-container">
+					<button th:if="${resendEnabled}" class="btn btn-outline-primary btn-sm resend" style="padding-left:10px;">Resend</button>
+					<button class="btn btn-outline-secondary btn-sm" id="nextNumber">Next Number</button>
+					<button class="btn btn-outline-primary btn-sm" id="changenumber">Cancel And Get New Number</button>
+					<button class="btn btn-outline-danger btn-sm" id="cancelNumber">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	activeNumber = $("#active-number").val();
+	var isRunning = false;
+	if(activeNumber == "false"){
+		getNumber();
+	} else {
+		isReady = true;
+		validateRegistration(function(rtnMsg){
+		});
+		getOtp();
+		$("#resend-cancel-div").show();
+	}
+</script>
+
+<script th:if="${activeService != null}" th:inline="javascript">
+	activeService = [[${activeService}]];
+	$(".servers-container").removeClass("hidden");
+	$("#" + activeService).closest("div").addClass("active");
+	$("#" + activeService).addClass("disabled");
+	
+</script>
