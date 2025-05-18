@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "otp.base.url",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.base.url'"
+  },
+  {
+    "name": "otp.url.getnumber",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.url.getnumber'"
+  },
+  {
+    "name": "otp.url.getStatus",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.url.getStatus'"
+  },
+  {
+    "name": "otp.url.getFullSms",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.url.getFullSms'"
+  },
+  {
+    "name": "otp.url.cancel",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.url.cancel'"
+  },
+  {
+    "name": "otp.url.getBalance",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.url.getBalance'"
+  },
+  {
+    "name": "otp.url.getPrice",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.url.getPrice'"
+  }
+]}
