@@ -9,8 +9,7 @@
     "start": "node src/main/resources/static/js/dashboard.js",
 	 "build": "npm install"
   },
-},
-{
+
 
   "engines": {
     "node": "17.x"
