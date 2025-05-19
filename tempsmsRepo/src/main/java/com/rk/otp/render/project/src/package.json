@@ -5,14 +5,12 @@
     "tempsms": "^1.0.0"
   },
   "scripts": {
-	 "build": "npm install",
-    "start": "node src/main/resources/static/js/dashboard.js"
+	
+    "start": "node src/main/resources/static/js/dashboard.js",
+	 "build": "npm install"
   },
-{
-  "scripts": {
-    "build": "yarn"
-  }
-},
+
+
   "engines": {
     "node": "17.x"
   }
