@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "node src/main/resources/static/js/dashboard.js"
-  }
+  },
 {
   "scripts": {
     "build": "your-build-command-here"
