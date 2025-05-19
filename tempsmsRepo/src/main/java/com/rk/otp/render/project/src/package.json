@@ -4,7 +4,7 @@
   "dependencies": {
     "tempsms": "^1.0.0"
   },
-  "script": {
+  "scripts": {
     "start": "node dashboard.js",
     "build": "your-build-command-here"
   },
