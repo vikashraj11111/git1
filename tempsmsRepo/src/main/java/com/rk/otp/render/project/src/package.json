@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+     "tempsms": "17"
+   }
+
+   "script": {
+     "start": "node dashboard.js"
+   }
+}
