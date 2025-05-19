@@ -1,12 +1,14 @@
 {
-	"dependencies": {
-     "tempsms": "Java SE 17"
-   }
-}
-
-{
-
-   "script": {
-     "start": "node dashboard.js"
-   }
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "dependencies": {
+    "tempsms": "^1.0.0"
+  },
+  "script": {
+    "start": "node dashboard.js",
+    "build": "your-build-command-here"
+  },
+  "engines": {
+    "node": "17.x"
+  }
 }
