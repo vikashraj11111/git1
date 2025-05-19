@@ -1,0 +1,74 @@
+.list-group-item:nth-child(odd) {
+	background-color: #090909;
+	color: white;
+}
+
+.list-group-item:nth-child(even) {
+	background-color: black;
+	color: white;
+}
+
+.list-group-item:nth-child(odd):hover {
+	background-color: black;
+	color: red;
+	text-shadow: 0px 0 10px #8b0e0e59, 0 0px 10px #d50ce2;
+}
+
+.list-group-item:nth-child(even):hover {
+	background-color: #090909;
+	color: red;
+	text-shadow: 0px 0 10px #8b0e0e59, 0 0px 10px #d50ce2;
+}
+
+.list-group {
+	box-shadow: 0 6px 10px 0 red, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transition: 0.5s;
+}
+
+.list-group:hover {
+	box-shadow: 0 6px 10px 0 white, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transition: 0.5s;
+}
+
+.list-group-item {
+	background-color: white;
+	color: black
+}
+
+/***************************************************
+**************** L I S T   G R O U P ****************
+****************************************************/
+
+@keyframes boxShadowAnimate {
+	0% {
+		box-shadow: 0 6px 10px 0 red, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	25% {
+		box-shadow: 6px 0px 10px 0 red, 6px 0px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	50% {
+		box-shadow: 0 -6px 10px 0 red, 0 -6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	75% {
+		box-shadow: -6px 0px 10px 0 red, -6px 0 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	100% {
+		box-shadow: 0 6px 10px 0 red, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+}
+
+@keyframes hueRotate{
+  0%  {
+    filter: hue-rotate(0deg);
+  }
+  50%  {
+    filter: hue-rotate(-120deg);
+  }
+  100%  {
+    filter: hue-rotate(0deg);
+  }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+	<h1>All Orders List</h1>
+	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<div><a href="/admin/userTools" class="d-grid gap-2 pt-2"><button class="btn btn-outline-primary btn-sm">Go back</button></a></div>
+	<hr>
+	
+	<div class="search-box-admin">
+		<i class="fa fa-search icon" aria-hidden="true"></i>
+		<input type="text" class="search-input search-orders" placeholder="Search Order" title="Type transaction id">
+	</div>
+	
+	<div class="table-responsive table-condensed">
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th> TxId </th>
+		            <th> Amount</th>
+		            <th> Payment Method</th>
+		            <th> Username </th>
+		            <th> CreatedTime </th>
+		            <th> Status </th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="order, stat : ${orderDetails.content}">
+		            <td><span th:text="${order.paymentId}"></span></td>
+		            <td><span th:text="${order.amount}"></span></td>
+		            <td><span th:text="${order.paymentMethod}"></span></td>
+		            <td><span th:text="${order.username}"></span></td>
+		            <td><span th:text="${#temporals.format(order.createTime,'dd-MMM-yy | hh:mm a')}"></span></td>
+		            <td><span th:text="${order.status}"></span></td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+	
+	
+	<nav aria-label="Page navigation">
+		<ul th:if="${orderDetails.totalPages > 1}" class="pagination">
+		    <th:block th:if="${orderDetails.totalPages <= 6}">
+			    <li class="page-item" th:each="pageNumber : ${pageNumbers}" th:classappend="${pageNumber==orderDetails.number + 1} ? active">
+				    <a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${pageNumber})}" th:text=${pageNumber} class="page-link"></a>
+				</li>
+			</th:block>
+			
+			<th:block th:if="${orderDetails.totalPages > 6}">
+				<th:block th:if="${currentPage <= 2 || currentPage > orderDetails.totalPages - 2}">
+					<li class="page-item" th:each="i : ${#numbers.sequence(1, 2)}" th:classappend="${currentPage == i} ? active">
+					    <a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${i})}" th:text="${i}" class="page-link"></a>
+					</li>
+					<li class="page-item">
+						<th:block th:if="${currentPage <= 2}">
+							<a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=3)}" th:text="..." class="page-link"></a>
+						</th:block>
+						
+						<th:block th:if="${currentPage > orderDetails.totalPages - 2}">
+							<a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${orderDetails.totalPages - 2})}" th:text="..." class="page-link"></a>
+						</th:block>
+					</li>
+					
+					<li class="page-item" th:each="i : ${#numbers.sequence(orderDetails.totalPages - 1, orderDetails.totalPages)}" th:classappend="${currentPage == i} ? active">
+					    <a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${i})}" th:text="${i}" class="page-link"></a>
+					</li>
+				</th:block>
+				
+				<th:block th:if="${currentPage > 2 && currentPage <= orderDetails.totalPages - 2}">
+					 <li class="page-item first" th:classappend="${currentPage > 1 ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=1)}" tabindex="-1"  th:text="'&laquo;'"></a>
+		            </li>
+				    
+				    <li class="page-item prev" th:classappend="${currentPage > 1 ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${currentPage - 1})}" tabindex="-1"  th:text="'<'"></a>
+		            </li>
+					
+					<li class="page-item">
+						<a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${currentPage - 2})}" th:text="..." class="page-link"></a>
+					</li>
+					
+					<li class="page-item" th:each="i : ${#numbers.sequence(currentPage - 1, currentPage + 1)}" th:classappend="${currentPage == i} ? active">
+					    <a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${i})}" th:text="${i}" class="page-link"></a>
+					</li>
+					
+					<li class="page-item">
+						<a th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${currentPage + 2})}" th:text="..." class="page-link"></a>
+					</li>
+					
+					<li class="page-item next" th:classappend="${currentPage < orderDetails.totalPages ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${currentPage + 1})}" tabindex="-1" th:text="'>'"></a>
+		            </li>
+		            <li class="page-item last" th:classappend="${currentPage < orderDetails.totalPages ? '' : 'disabled'}">
+		                <a class="page-link" th:href="@{${'/admin/getAllOrders'}(size=${orderDetails.size}, page=${orderDetails.totalPages})}" tabindex="-1" th:text="'&raquo;'"></a>
+		            </li>
+				</th:block>
+				
+			</th:block>
+			
+		</ul>
+	</nav>
+	
+</div>
+
+</body>
+</html>
