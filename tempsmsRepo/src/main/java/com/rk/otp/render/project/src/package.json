@@ -5,9 +5,13 @@
     "tempsms": "^1.0.0"
   },
   "scripts": {
-    "start": "node src/main/resources/static/js/dashboard.js",
-    "build": "yarn"
-  },
+    "start": "node src/main/resources/static/js/dashboard.js"
+  }
+{
+  "scripts": {
+    "build": "your-build-command-here"
+  }
+},
   "engines": {
     "node": "17.x"
   }
