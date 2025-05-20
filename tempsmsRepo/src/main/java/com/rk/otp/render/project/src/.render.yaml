@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: java-app
-    env: java
-    plan: free
-    buildCommand: ""
-    startCommand: java -jar Target1/tempsms-3.1.2.jar
-    autoDeploy: true
