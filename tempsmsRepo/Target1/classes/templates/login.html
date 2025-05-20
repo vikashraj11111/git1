@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login | tempsms</title>
+</head>
+<body>
+<div class="container2">
+  	<div class="wrapper">
+  	
+  		<th:block th:if="${session.loginRedirect == null}">
+	    	<th:block th:replace="~{login_fragments :: script1}"></th:block>
+	    </th:block>
+	    
+  		<th:block th:if="${session.loginRedirect}">
+	    	<th:block th:replace="~{login_fragments :: script2}"></th:block>
+	    </th:block>
+	    
+	</div>
+
+	
+</div>
+</body>
+</html>

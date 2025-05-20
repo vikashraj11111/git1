@@ -1,0 +1,22 @@
+az webapp deploy --resource-group tempsms-resource --name tempsms-app --src-path D:\git\tempsms\target\tempsms-3.1.2.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-reseller --src-path D:\git\Otp-website-reseller\target\tempsms-reseller-1.0.2.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-1 --src-path D:\git\otpwebsite-tempnum\target\otpwebsite-tempnum-1.0.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-s2 --src-path D:\git\otpwebsite-sms-activate\target\otpwebsite-sms-activate-1.0.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-s3 --src-path D:\git\otpwebsite-smsbower\target\otpwebsite-smsbower-1.0.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-s4 --src-path D:\git\otpwebsite-fastsms\target\otpwebsite-fastsms-1.0.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-s6 --src-path D:\git\otpwebsite-constancesky\target\otpwebsite-constancesky-1.0.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-validationapi --src-path D:\git\Otp-registered-validation\target\registered-validation-1.0.0.jar
+
+## Change urls and build
+az webapp deploy --resource-group tempsms-resource --name tempsms-scheduler --src-path D:\git\OtpWebsiteTasksExecutor\target\otpwebsitetaskexecutor-1.1.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-recharge-server --src-path D:\git\PaymentVerification\target\paymentverification-2.1.0.jar
+
+az webapp deploy --resource-group tempsms-resource --name tempsms-bot --src-path C:\Workspaces\Otp-Website\TeleBot\target\bot-1.0.1.jar

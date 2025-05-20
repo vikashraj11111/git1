@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ADMIN | OtpWala Website</title>
+</head>
+<body>
+<div class="container">
+	<h1>Add a new Service</h1>
+	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<div><a href="/admin/serverTools" class="d-grid gap-2 pt-2"><button class="btn btn-outline-primary btn-sm">Go back</button></a></div>
+	<hr>
+	<form id="addServiceForm" autocomplete="off">
+		<div class="message alert hidden"></div>
+	    
+	    <div class="select-box select-box-admin">
+			<div class="options-container">
+				<div class="option" th:each="server : ${servers}">
+					<div class="text-uppercase font-monospace" th:id="${server}" th:text="${server}"></div>
+				</div>
+			</div>
+			<div class="selected selected-server font-monospace" data-value="" th:text="#{select.option.service.default}"></div>
+			<div class="search-box">
+				<input type="text" class="font-monospace text-muted" autocomplete="off" placeholder="Search..." />
+			</div>
+		</div>
+	    
+	    <div class="select-box select-box-admin">
+			<div class="options-container">
+				<div class="option" th:each="service : ${serviceList}">
+					<div class="text-uppercase font-monospace" th:id="${service.serviceId}" th:text="${service.serviceName}"></div>
+					<input type="hidden" th:value="${service.serviceCode}">
+				</div>
+			</div>
+			<div class="selected selected-service font-monospace" data-value="" th:text="#{select.option.service.default}"></div>
+			<div class="search-box">
+				<input type="text" class="font-monospace text-muted" autocomplete="off" placeholder="Search..." />
+			</div>
+		</div>
+	    
+	    <div class="form-group pb-2 hidden">
+	        <input class="form-control" autofocus autocomplete="off" id="service-code" placeholder="Service Code" />
+	    </div>
+	    
+	    <div class="form-group pb-2">
+	        <input class="form-control" autocomplete="off" type="number" id="service-price" placeholder="Price" />
+	    </div>
+	    
+	    <button class="submit btn btn-primary" th:text="#{label.form.update.submit}"></button>
+	</form>
+	
+	<div class="confirmDiv pt-3 hidden">
+		<div class="confirm-service pb-2"></div>
+		<button class="btn btn-outline-primary btn-sm confirm-add-service">Confirm</button>
+		<button class="btn btn-outline-primary btn-sm cancel-add-service">Cancel</button>
+	</div>
+		
+	
+</div>
+
+<script>
+	$(document).ready(function() {
+		$(".selected-server").prev().find(".text-uppercase").click(function(){
+			let server = $(this).attr("id");
+			$("#service-code").val('');
+			if(server == "server6" || server == "server4")
+				$("#service-code").closest(".form-group").removeClass("hidden");
+			else 
+				$("#service-code").closest(".form-group").addClass("hidden");
+		})
+		
+		$(document).on("submit", "#addServiceForm", function(evt) {
+			evt.preventDefault();
+			let server = $(".selected-server").attr("data-value");
+			if(!server) {
+				showToast('error', 'Please select server');
+				return;
+			}
+			
+			let serviceId = $(".selected-service").attr("data-value");
+			if(!serviceId) {
+				showToast('error', 'Please select service');
+				return;
+			}
+			
+			let servicePrice = $("#service-price").val();
+			let serviceName = $(".selected-service").text().trim();
+			
+			let serviceCode = $("#service-code").val();
+			if($("#service-code").closest(".form-group").hasClass("hidden"))
+				serviceCode = $(".selected-service").prev().find("#" + serviceId).next().val();
+			
+			console.log(serviceCode)
+			if(!(serviceCode && servicePrice)) {
+				showToast('error', 'Please input all values');
+				return;
+			}
+			
+			$(".confirm-service").text("Confirm service -> id: " + serviceCode + ", name: " + serviceName);
+			$(".submit").attr('disabled', true);
+			$(".confirmDiv").removeClass("hidden");
+		})
+		
+		
+		$(document).on("click", ".confirm-add-service", function() {
+			$(".confirmDiv").addClass("hidden");
+			let server = $(".selected-server").attr("data-value");
+			let serviceId = $(".selected-service").attr("data-value");
+			let serviceCode = $("#service-code").val();
+			if($("#service-code").closest(".form-group").hasClass("hidden"))
+				serviceCode = $(".selected-service").prev().find("#" + serviceId).next().val();
+			console.log(serviceCode)
+			let serviceName = $(".selected-service").text().trim();
+			let servicePrice = $("#service-price").val();
+			
+			clearForm();
+			addService(server, serviceCode, serviceName, servicePrice, serviceId, function(data) {
+				if(data == "ALREADY_PRESENT") {
+					showToast('error', 'Service Already existing in ' + server);
+				} else if(data == "FAILURE") {
+					showToast('error', 'Could not add this service');
+				} else {
+					showToast('success', 'Successfully added ' + serviceName + ' in ' + server);
+				}
+				
+				$(".submit").removeAttr('disabled')
+			});
+		})
+		
+		$(document).on("click", ".confirm-add-service", function(){
+			$(".confirmDiv").addClass("hidden");
+			$(".submit").removeAttr('disabled')
+		})
+		
+	})
+</script>
+
+</body>
+</html>

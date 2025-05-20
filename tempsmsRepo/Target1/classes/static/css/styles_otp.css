@@ -1,0 +1,129 @@
+.price-group > div {
+	color: white
+}
+
+.table-condensed {
+	font-size: 14px;
+}
+
+.messageDiv {
+	display: none
+}
+
+#resend-cancel-div {
+	display: none;
+}
+
+#retry-div {
+	display: none;
+}
+
+span.resend {
+	width:30px;
+	height: 30px;
+	background: url('/images/Button_Refresh.png');
+	background-size: 30px 30px;
+}
+
+span.cancel {
+	width:30px;
+	height: 30px;
+	background: url('/images/close-icon.png');
+	background-size: 30px 30px;
+}
+
+.click-to-copy {
+	position: absolute;
+	right: 0;
+	top: -15px;
+}
+
+.click-to-copy::before {
+	content: 'Click Number to Copy';
+	display: block;
+	font-size: 70%;
+}
+
+.otpDiv {
+	position: relative;
+	z-index: 1;
+}
+
+.otpDiv, .messageDiv {
+	background: linear-gradient(270deg, #0e2f45, transparent);
+	margin-left: 2px;
+	transition: 1s;
+	border-radius: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.box-shadow-1 {
+	box-shadow : 0 6px 10px 0 #1a2a2e, 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.box-shadow-2 {
+	box-shadow : 0 6px 10px 0 #03364e, 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.otpDiv > div {
+	padding-bottom: 2px;
+}
+
+.otp-div {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.otp, .otp2 {
+	color: #e6dc00;
+    text-shadow: 1px 1px 100px #3bdfff, 5px 5px 10px #07d3f8, 0 0px 20px lightslategrey;
+}
+
+.number {
+	text-shadow: -1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px blue;
+}
+
+.number span {
+	text-shadow: 0 0 black, 0 0 black, 0 0 black, 0 0 black;
+}
+
+.number-container {
+	position: relative;
+}
+
+.changecolor {
+	color: #ffabab;
+}
+
+#service {
+	display: none;
+}
+
+.validate-registration {
+	display: none;
+}
+
+.cancel-resend-container, .retry-container {
+	display: flex;
+	justify-content: flex-end;
+	
+}
+
+.cancel-resend-container > .btn, .retry-container > .btn {
+	flex: 1 1 auto;
+}
+
+.servers-container > div {
+	display: none;
+}
+
+
+.servers-container > div.active {
+	display: flex;
+}
+
+.app-name-header {
+	color: red;
+    font-weight: bold;
+}

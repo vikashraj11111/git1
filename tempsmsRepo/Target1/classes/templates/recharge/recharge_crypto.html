@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>tempsms</title>
+<style>
+.iframe-portrait {
+	margin: 20px 10px 20px 10px;
+	max-width: 600px;
+	width: 100%;
+	height: 600px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="ps-3 row card bg-dark text-white text-no-wrap" th:if="${user != null}">
+		<div class="card-body pb-2 pt-2">Balance : <span class="balance" th:text="${user.balance}"></span></div>
+	</div>
+	<div><a href="/recharge" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back</button></a></div>
+	<hr>
+	<div class="message alert hidden"></div>
+	<form class="recharge recharge-form-crypto">
+		<input type="number" autofocus id="payment_amount_trx" data-cur="TRX" placeholder="Enter Recharge Amount in TRX" autocomplete="off" />
+		<div class="p-1 form-checkbox currency-selector-checkbox">
+		    <div class="switch">
+			    <input id="currency" name="currency"  type="checkbox" class="switch-input" />
+	    		<label for="currency" class="switch-label">Currency</label>
+		    </div>
+		</div>
+		<button type="submit" class="submit btn btn-primary btn-sm mt-2 btn-block">Top Up</button>
+		<p id="trx-note" style="color: yellow;">1 TRX = Rs. 10</p>
+	</form>
+	<div class="crypto-details hidden">
+		<hr>
+		<div class="v pb-2 align-center">
+			<input type="hidden" id="payment_id" />
+			<div>Send exactly <code class="trx-deposit-amount"></code> TRX to below address within 30 minutes.</div>
+			<div>Crypto Address: <code class="trx-deposit-id ps-3" title="Click to Copy" style="font-size: 120%"></code>
+				<span id="copied-success" class="copied text-success">Copied!</span>
+			</div>
+			<br>
+			<div class="p-1 align-center" style="color: black; background: yellow">Note: Only send payment to above mentioned Tron (TRX) address (TRC20 chain)</div>
+			<div class="p-1 align-center">Note2: If payment is success, recharge amount will be added to your account within 5-10 mins.</div>
+		</div>
+		<!-- <div class="align-center">Or Scan below QR Code</div>
+		<div class="qr-code m-3">
+			<img class="rounded mx-auto d-block img-fluid" src="/images/crypto_QR.png" alt="qr_code" />
+		</div> -->
+		
+		<div class="p-1 d-flex justify-content-center">If Payment not done within 30 minutes, <button class="recharge-help btn btn-danger btn-sm">Contact Admin</button></div>
+		
+		<!--/*--> <div class="p-3 d-flex justify-content-center video-help">
+			<button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#video" aria-expanded="false" aria-controls="video">
+				Need Help? Watch Video
+			</button>
+		</div> <!--*/-->
+	</div>
+	
+	<hr>
+	<div class="d-grid gap-2 pt-2">Pending Recharges</div>
+	<hr>
+	<div class="table-responsive table-condensed">
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th> OrderId </th>
+		            <th> Amount</th>
+		            <th> Currency</th>
+		            <th> status </th>
+		            <th> CreatedTime</th>
+		            <th> Pay Address</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="order, stat : ${pendingOrdersList}">
+		            <td><span th:text="${order.orderId}"></span></td>
+		            <td><span th:text="${order.amount}"></span></td>
+		            <td><span th:text="${order.currency}"></span></td>
+		            <td><span th:text="${order.status}"></span></td>
+		            <td><span th:text="${#temporals.format(order.createTime,'dd-MMM-yy | hh:mm a')}"></span></td>
+		            <td><span th:text="${order.payAddress}"></span></td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+	
+	<hr>
+	<div><a href="/recharge/rechargeHistory" class="d-grid gap-2 pt-2"><button class="btn btn-secondary btn-sm btn-block">Recharge History</button></a></div>
+	<hr>
+	
+</div>
+
+</body>
+</html>
