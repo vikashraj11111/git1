@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Price List | tempsms</title>
+<style>
+
+.search-box-a i {
+    position: absolute;
+}
+  
+.search-box-a {
+    width: 100%;
+    margin-bottom: 10px;
+}
+  
+.icon {
+    padding: 15px;
+    color: #ff2828;
+    min-width: 50px;
+    text-align: center;
+}
+  
+.search-input {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    background-color: #38383891;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<h2>All Services List</h2>
+	<hr>
+	<div class="search-box-a">
+		<i class="fa fa-search icon" aria-hidden="true"></i>
+		<input type="text" class="search-input search-service-input" placeholder="Search a service" autofocus title="Type service name">
+	</div>
+	
+	<table class="table table-bordered">
+	    <thead>
+	        <tr>
+	            <th> Service Name </th>
+	            <th> Price </th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr class="services-list" th:each="entry : ${servicePriceMap}">
+	            <td><span class="service-name" th:text="${entry.key}"></span></td>
+	            <td><span th:each="val, stat : ${entry.value}" th:text="${stat.index == 0 ? val : ', ' + val}"></span></td>
+	        </tr>
+	    </tbody>
+	</table>
+	
+</div>
+
+<script>
+$(document).ready(function(){
+	$(document).on("keyup", ".search-service-input", function(){
+		filter = $(".search-service-input").val().toUpperCase();
+		$(".table tbody tr").each(function(){
+			textValue = $(this).find("td:first").find("span").text().toUpperCase();
+			if(textValue.indexOf(filter) == -1)
+				$(this).hide();
+			else
+				$(this).show();
+	  	});
+	})
+})
+</script>
+</body>
+</html>

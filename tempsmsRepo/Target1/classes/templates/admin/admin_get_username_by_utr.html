@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+	<h1>Get Order Details By UTR/TxId</h1>
+	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<div><a href="/admin/userTools" class="d-grid gap-2 pt-2"><button class="btn btn-outline-primary btn-sm">Go back</button></a></div>
+	<hr>
+	
+	<form id="retrieve-order-by-utr-form" autocomplete="off">
+		<div class="message alert hidden"></div>
+	    
+	    <div class="form-group pb-2">
+	        <input class="form-control" autofocus autocomplete="off" id="utr" th:placeholder="#{label.user.recharge.utr}" />
+	    </div>
+	    
+	    <button class="submit btn btn-primary" th:text="#{label.form.submit}"></button>
+	</form>
+	
+	<hr>
+	<div id="order-details" class="table-responsive table-condensed" style="display: none;">
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th> TxId </th>
+		            <th> Amount</th>
+		            <th> Username</th>
+		            <th> status </th>
+		            <th> CreatedTime </th>
+		            <th> Mode </th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <td><span id="order-txid"></span></td>
+		            <td><span id="order-amount"></span></td>
+		            <td><span id="order-username"></span></td>
+		            <td><span id="order-status"></span></td>
+		            <td><span id="order-created-time"></span></td>
+		            <td><span id="order-payment-method"></span></td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+	
+</div>
+
+</body>
+</html>

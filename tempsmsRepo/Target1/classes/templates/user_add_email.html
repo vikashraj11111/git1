@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Email | tempsms</title>
+</head>
+<body>
+<div class="container2">
+	<div th:if="${EMAIL == null}" class="container text-center">
+	    <h2>Add Email for better security of your account</h2>
+	    <hr>
+	    <div class="message alert hidden"></div>
+	    <form id="add-email-form" class="d-grid">
+			<input type="email" autofocus id="email" placeholder="Enter Email" autocomplete="off" />
+			<button class="btn btn-primary btn-sm mt-2 btn-block add-email">Add</button>
+			<button class="btn btn-sm btn-secondary mt-2 btn-block skip">Skip</button>
+		</form>
+	</div>
+	
+	<div th:if="${EMAIL != null}" class="container text-center">
+	    <h3>You already have your email verified.</h3>
+	    <span>Email id is: <th:block th:text="${EMAIL}"></th:block></span>
+	</div>
+
+	
+</div>
+</body>
+</html>

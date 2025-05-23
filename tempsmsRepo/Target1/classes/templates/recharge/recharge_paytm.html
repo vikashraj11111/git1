@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<style>
+.iframe-portrait {
+	margin: 20px 10px 20px 10px;
+	max-width: 600px;
+	width: 100%;
+	height: 600px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="ps-3 row card bg-dark text-white text-no-wrap" th:if="${user != null}">
+		<div class="card-body pb-2 pt-2">Balance : <span class="balance" th:text="${user.balance}"></span></div>
+	</div>
+	<div><a href="/recharge" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back</button></a></div>
+	<hr>
+	<div class="alert btn-warning btn-sm">Only Phonepe is working with this Method</div>
+	<div class="message alert hidden"></div>
+	<form class="d-grid recharge-form-paytm">
+		<input class="form-control" type="text" autofocus id="utr" placeholder="Enter Transaction id" autocomplete="off" />
+		<button type="submit" class="submit btn btn-primary btn-sm mt-2 btn-block">Proceed</button>
+		<div><a href="/recharge/rechargeHistory" class="d-grid gap-2 pt-2"><button class="btn btn-secondary btn-sm btn-block">Recharge History</button></a></div>
+	</form>
+	<hr>
+	<div class="paytm-details">
+		<div class="d-flex justify-content-center">Scan below QR Code</div>
+		<div class="qr-code m-3">
+			<img class="rounded mx-auto d-block img-fluid" src="/images/Paytm_QR.jpg" alt="qr_code" />
+		</div>
+		
+		<div class="p-1 d-flex justify-content-center">Note: Only send payment to above mentioned QR code</div>
+		
+	</div>
+	
+	<div class="p-1 justify-content-center recharge-help-container">
+		<button class="recharge-help btn btn-danger btn-sm">Need Help. Click Here</button>
+	</div>
+	
+</div>
+
+</body>
+</html>

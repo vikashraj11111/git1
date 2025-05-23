@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>tempsms</title>
+</head>
+<body>
+<div class="container">
+	<div class="pb-2" th:if="${user != null}">
+		<div class="row">
+		 	<div class="mb-3 card bg-dark text-white" style="line-height: 2;">
+				<div class="card-body pb-2 pt-2">Balance : <span class="balance" th:utext="${user.balance}"></span></div>
+			</div>
+		</div>
+		
+		<input type="hidden" th:id="active-number" th:value="${activeNumber}" />
+		
+		<div class="select-box select-box-otp">
+			<div class="options-container">
+				<div class="option" th:each="entry : ${activeServicesMap}">
+					<div class="service text-uppercase font-monospace" th:id="${entry.key}" th:utext="${entry.value[0].serviceName}  + '<span class=\'text-info\'> (₹' + ${entry.value[0].price} + ')</span>'"></div>
+				</div>
+			</div>
+			<div class="selected font-monospace" th:text="#{select.option.service.default}"></div>
+			<div class="search-box">
+				<input type="text" class="font-monospace text-muted" autocomplete="off" placeholder="Search..." />
+			</div>
+		</div>
+		
+		<div class="servers-container pt-2 hidden">
+			<div th:each="entry, stat : ${activeServicesMap}" th:id="'servers_' + ${entry.key}" class="btn-group btn-group-justified a-flex">
+				<button class="btn btn-danger-cstm btn-sm font-monospace" th:each="val : ${entry.value}" th:id="${val.code}" th:text="${val.server} + ' (₹' + ${val.price} + ')'"></button>
+			</div>
+			
+		</div>
+	</div>
+	<div id="otp-content"></div>
+	<div class="message alert hidden"></div>
+	
+</div>
+
+<script th:if="${user != null && !activeNumber}">
+	$(document).ready(function() {
+		
+		$("#otp-content").hide();
+		
+		$(".servers-container button").click(function(){
+			let id = $(this).prop("id");
+			$(".servers-container").find(".disabled").removeClass("disabled");
+			$(this).addClass("disabled");
+			loadOtpPage(id);
+		})
+	})
+</script>
+
+<script th:if="${activeNumber}">
+	$("#otp-content").show();
+	
+	$("#otp-content").load("/otp/activeNumber", function(){
+		/* $(".copybox").show(); */
+	});
+	
+	$(".servers-container button").click(function(){
+		$("#active-number").val("false");
+		let id = $(this).prop("id");
+		$(".servers-container").find(".disabled").removeClass("disabled");
+		$(this).addClass("disabled");
+		loadOtpPage(id);
+	})
+	
+</script>
+
+</body>
+</html>

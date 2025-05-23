@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ADMIN | Tempsms</title>
+</head>
+<body>
+<div class="container">
+	<h1>All Services List</h1>
+	<div><a href="/admin/console" class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm">Go back to Admin Console</button></a></div>
+	<div><a href="/admin/serverTools" class="d-grid gap-2 pt-2"><button class="btn btn-outline-primary btn-sm">Go back</button></a></div>
+	<hr>
+	<div class="table-responsive table-condensed">
+		<table class="table table-bordered services-list-table">
+		    <thead>
+		        <tr>
+		            <th> service_id </th>
+		            <th> service_code </th>
+		            <th> service_name </th>
+		            <th></th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="service : ${serviceList}" th:id="${service.serviceId}">
+		            <td><span th:text="${service.serviceId}"> service_id </span></td>
+		            <td class="editable">
+		            	<span th:text="${service.serviceCode}"> service_code </span>
+		            	<input class="hidden" type="text" size="1" th:value="${service.serviceCode}" />
+		            	<button class="btn btn-primary btn-sm update-service-code hidden">Done</button>
+		            </td>
+		            <td class="editable">
+		            	<span th:text="${service.serviceName}"> service_name </span>
+		            	<input class="hidden" type="text" size="1" th:value="${service.serviceName}" />
+		            	<button class="btn btn-primary btn-sm update-service-name hidden">Done</button>
+		            </td>
+		            <td><button class="btn btn-primary btn-sm edit-service">Edit</button></td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+	
+</div>
+
+<script th:inline="javascript">
+	$(document).ready(function() {
+		$(".edit-service").click(function(){
+			
+			$(this).parent().parent().find(".editable").each(function(){
+				$(this).children().each(function(){
+					$(this).toggleClass("hidden");
+				})
+			})
+			
+		})
+		
+		$(".update-service-code").each(function(){
+			let serviceCode = $(this).siblings().find("input").val();
+			let pathName = location.pathname;
+			let server = [[${server}]];
+			getPriceByServiceId(serviceId, server, function(data){
+				if(!data) {
+					$("#" + serviceId).find(".server_price").text("null");
+				} else if(data != "ERROR"){
+					$("#" + serviceId).find(".server_price").text(data);
+				}
+			})
+			
+		})
+		
+	})
+
+</script>
+
+</body>
+</html>
